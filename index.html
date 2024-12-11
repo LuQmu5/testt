@@ -9,20 +9,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-    <script>
-      function FromUnityToJs ()   // функция вызывается из Unity
-      {
-        alert ("Very good!");
-      }
-
-      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Lesson_build.json", {onProgress: UnityProgress}); // запуск unity на странице
-
-      jQuery(document).ready(function($) // страница прогружена
-      {
-
-      });
-    </script>
-
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -117,12 +103,15 @@
 
       loadingBar.style.display = "block";
 
+      var myGameInstance = null; // для обращения к Unity
+
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
+                myGameInstance = unityInstance;
                 loadingBar.style.display = "none";
                 fullscreenButton.onclick = () => {
                   unityInstance.SetFullscreen(1);
@@ -135,5 +124,19 @@
       document.body.appendChild(script);
 
     </script>
+
+    <script>   // Пользовательский код
+      function FromUnityToJs ()   // функция вызывается из Unity
+      {
+        alert("Hi!");
+      }
+
+      jQuery(document).ready(function($) // страница прогружена
+      {
+          
+      });
+
+    </script>
+
   </body>
 </html>
