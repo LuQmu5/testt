@@ -129,24 +129,29 @@
     <script>   // Пользовательский код
       function FromUnityToJs ()   // функция вызывается из Unity
       {
-        callMethodWallPost();
+        callMethodPostStory();
       }
 
-      function callMethodWallPost() // вызываем метод ВК
+      function callMethodPostStory() // вызываем метод ВК
       {
-        vkBridge.send('VKWebAppShowWallPostBox', {
-          message: 'Первая запись на стене!'
-          })
-          .then((data) => {
-            if (data.post_id) {
-              // Запись размещена
-              console.log ("ok");
-            }
-          })
-          .catch((error) => {
-            // Ошибка
-            console.log(error);
-          });
+        bridge.send('VKWebAppShowStoryBox', {
+        background_type: 'image',
+        url : 'https://sun9-65.userapi.com/c850136/v850136098/1b77eb/0YK6suXkY24.jpg',
+        attachment: {
+          text: 'book',
+          type: 'photo',
+          owner_id: 743784474,
+          id: 12345678
+        }})
+        .then((data) => {
+          if (data.code_data) {
+            // Редактор историй открыт
+            console.log(data);
+          }})
+        .catch((error) => {
+          // Ошибка
+          console.log(error);
+        });
       }
 
       jQuery(document).ready(function($) // страница прогружена
