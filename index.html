@@ -6,6 +6,23 @@
     <title>Unity WebGL Player | 2DEmptySample</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script>
+      function FromUnityToJs ()   // функция вызывается из Unity
+      {
+        alert ("Very good!");
+      }
+
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Lesson_build.json", {onProgress: UnityProgress}); // запуск unity на странице
+
+      jQuery(document).ready(function($) // страница прогружена
+      {
+
+      });
+    </script>
+
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
